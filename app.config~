@@ -1,0 +1,32 @@
+[FolderTree]
+tweetsFolder = tweets_To_Analyze
+tweetsArchive = tweetsArchive
+chartsFolder = chartsFolder
+
+[GUI]
+guiWidth = 300
+
+[Wordcloud]
+commonWords = ["new",
+	"via",
+	"price",
+	"dlvr",
+	"gl",
+	"eth",
+	"bitcoin",
+	'bitcoin',
+	"blockchain",
+	"btc",
+	"ethereum",
+	"crypto",
+	"cryptocurrency",
+	"twitter",
+	"exchange",
+	"https",
+	"reddit",
+	"pic",
+	"cryptocurrencies",
+	"ly",
+	"ift"
+	]
+
