@@ -21,7 +21,7 @@ class Wordcloud_Generator:
         u"\U0001F680-\U0001F6FF"  # transport & map symbols
         u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
         "]+", flags=re.UNICODE)
-		self.hashtag_pattern = re.compile(r"#(\w+)")
+		self.regexp = re.compile(r'[!@#$:).;,?&]')
 		self.commonWords = json.loads(commonWords)
 
 		# dataset with sentiment-wise evaluated words using values within interval <-5,5>
@@ -32,34 +32,12 @@ class Wordcloud_Generator:
 
 		self.mypath = os.path.dirname(__file__)
 
-	def createWordcloud(self, chartsFolder):
+	def createWordcloud(self, chartsFolder, maxCloudWords, borderDate):
 		# strings to store all the words from tweets
-		emojis = ""
-		hashtags = ""
 		words = ""
-		hashtagsAfter = ""
 		wordsAfter = ""
 
-		tweetFilesPath = os.path.join(self.mypath, 'tweets_To_Analyze')
-		tweetFiles = [f for f in os.listdir(tweetFilesPath) if os.path.isfile(os.path.join(tweetFilesPath, f))]
-
-		for file in tweetFiles:
-			with open(os.path.join(tweetFilesPath, file)) as csvFile:
-				reader = csv.reader(csvFile, delimiter=';')
-				for row in reader:
-					tweet = row[4]
-					# timestamp = parser.parse(row[1].split(' ', 1)[0])
-					overalTweetEmotion = 0
-					# iterate over words in tweets
-					for word in tweet.split():
-						if self.emoji_pattern.match(word):
-							emojis = emojis + ", " + word
-						elif self.hashtag_pattern.match(word):
-							hashtags = hashtags + ", " + word
-						elif not self.isCommon(word.lower()):
-							# analyze emotion semantics of particular word
-							# overalTweetEmotion = overalTweetEmotion + sentiment_dict.get(word,0)
-							words = words + ", " + word
+		borderDate = parser.parse(borderDate)
 
 		tweetFilesPath = os.path.join(self.mypath, 'tweets_To_Analyze')
 		tweetFiles = [f for f in os.listdir(tweetFilesPath) if os.path.isfile(os.path.join(tweetFilesPath, f))]
@@ -67,27 +45,48 @@ class Wordcloud_Generator:
 		for file in tweetFiles:
 			with open(os.path.join(tweetFilesPath, file)) as csvFile:
 				reader = csv.reader(csvFile, delimiter=';')
+				reader.next()  # pass headers
 				for row in reader:
 					tweet = row[4]
-					# timestamp = parser.parse(row[1].split(' ', 1)[0])
-					overalTweetEmotion = 0
 					# iterate over words in tweets
 					for word in tweet.split():
-						if self.emoji_pattern.match(word):
-							emojis = emojis + ", " + word
-						elif self.hashtag_pattern.match(word):
-							hashtagsAfter = hashtagsAfter + ", " + word
-						elif not self.isCommon(word.lower()):
-							# analyze emotion semantics of particular word
-							# overalTweetEmotion = overalTweetEmotion + sentiment_dict.get(word,0)
-							wordsAfter = wordsAfter + ", " + word
+						if not self.emoji_pattern.match(word) and not self.isCommon(word.lower()):
+							if self.regexp.search(word):
+								continue;
+							postedDate = parser.parse(row[1].split(' ', 1)[0])
+							if postedDate < borderDate:
+								words = words + "," + word
+							else:
+								wordsAfter = wordsAfter + "," + word
 
-		wordcloud = WordCloud(stopwords=STOPWORDS, max_words=10).generate(words)
-		wordcloud2 = WordCloud(stopwords=STOPWORDS, background_color='white', max_words=10).generate(wordsAfter)
+		wordcloud = WordCloud(stopwords=STOPWORDS, max_words=int(maxCloudWords)).generate(words)
+		wordcloud2 = WordCloud(stopwords=STOPWORDS, background_color='white', max_words=int(maxCloudWords)).generate(wordsAfter)
 		self.plotWordcloud(wordcloud, wordcloud2,chartsFolder,3)
 
+		#now plot the same but without shared words
+		uniqueWords = self.getUniqueWords(words, wordsAfter)
+		print uniqueWords
+		uniqueWordsAfter = self.getUniqueWords(wordsAfter, words)
+		wordcloud = WordCloud(stopwords=STOPWORDS, max_words=int(maxCloudWords)).generate(uniqueWords)
+		wordcloud2 = WordCloud(stopwords=STOPWORDS, background_color='white', max_words=int(maxCloudWords)).generate(uniqueWordsAfter)
+		self.plotWordcloud(wordcloud, wordcloud2, chartsFolder, 4)
+
+	#compares two comma separated strings and returns just unique words from the first string
+	def getUniqueWords(self,commaSeparatedWords1, commaSeparatedWords2):
+		words1 = commaSeparatedWords1.split(",")
+		words2 = commaSeparatedWords2.split(",")
+		uniqueWordsList = list(set(words1) - set(words2))
+		#return uniqueWordsList
+		return ','.join(map(str, uniqueWordsList))
+
 	def isCommon(self,word):
-		return word.lower() in self.commonWords;
+		for comm in self.commonWords:
+			stripped = word.strip().decode('utf-8')
+			if comm == stripped:
+				return True
+		return False
+
+	#return word.lower() in self.commonWords;
 
 	def plotWordcloud(self,before, after, chartsFolder, picNum):
 		plt.subplot(211)

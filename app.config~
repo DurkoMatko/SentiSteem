@@ -7,26 +7,5 @@ chartsFolder = chartsFolder
 guiWidth = 300
 
 [Wordcloud]
-commonWords = ["new",
-	"via",
-	"price",
-	"dlvr",
-	"gl",
-	"eth",
-	"bitcoin",
-	'bitcoin',
-	"blockchain",
-	"btc",
-	"ethereum",
-	"crypto",
-	"cryptocurrency",
-	"twitter",
-	"exchange",
-	"https",
-	"reddit",
-	"pic",
-	"cryptocurrencies",
-	"ly",
-	"ift"
-	]
+commonWords = ["yii","new","via","price","dlvr","gl","eth","bitcoin","blockchain","btc","ethereum","crypto","cryptocurrency","twitter","exchange","https","reddit","pic","cryptocurrencies","ly","ift"]
 

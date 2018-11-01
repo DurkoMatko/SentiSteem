@@ -7,6 +7,7 @@ import shutil
 import pickle
 import csv
 import collections
+import xlsxwriter
 import numpy as np
 import datetime as dt
 import matplotlib.pyplot as plt
@@ -111,8 +112,6 @@ def getDatesAndScores(reader,classifier):
 
 def executeAnalysis():
 	chartsFolder = config.get('FolderTree', 'chartsFolder')
-	wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'))
-	wordcloudGenerator.createWordcloud(chartsFolder)
 
 	f = open("trainedClassifier.pickle", 'rb')
 	myClassifier = pickle.load(f)
@@ -138,8 +137,52 @@ def executeAnalysis():
 			flooredPassedDays = convertDatesToPassedDays(dates=flooredDates)
 			plotPolynomials(minDate=min(dates), passedDays=flooredPassedDays, scores=flooredScores, chartsFolder=chartsFolder, picNum=2)
 
+			saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder)
+
 			csvFile.close()
 
+
+	wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'))
+	wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
+
+def saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder):
+	# Create a workbook and add a worksheet.
+	workbook = xlsxwriter.Workbook(chartsFolder + '/scores.xlsx')
+	worksheet = workbook.add_worksheet()
+	dateFormat = workbook.add_format({'num_format': 'dd/mm/yyyy'})
+
+	#headers
+	worksheet.write(0, 0, "Date")
+	worksheet.write(0, 1, "Score")
+	worksheet.write(0, 2, "Floored date")
+	worksheet.write(0, 3, "Floored score")
+
+	passedDays = convertDatesToPassedDays(dates=dates)
+	flooredPassedDays = convertDatesToPassedDays(dates=flooredDates)
+
+	originalDates = convertPassedDaysToDates(minDate=min(dates), days=passedDays)
+	originalFlooredDates = convertPassedDaysToDates(minDate=min(dates), days=flooredPassedDays)
+	# Start from the first cell. Rows and columns are zero indexed.
+	row = 1
+	col = 0
+
+	# Iterate over the data and write it out row by row.
+	for date, score in zip(originalDates, scores):
+		worksheet.write(row, col, date, dateFormat)
+		worksheet.write(row, col + 1, score)
+		row += 1
+
+	# Start from the first cell. Rows and columns are zero indexed.
+	row = 1
+	col = 2
+
+	# Iterate over the data and write it out row by row.
+	for date, score in zip(originalFlooredDates, flooredScores):
+		worksheet.write(row, col, date, dateFormat)
+		worksheet.write(row, col + 1, score)
+		row += 1
+
+	workbook.close()
 
 
 def convertDatesToPassedDays(dates):
@@ -242,32 +285,40 @@ if __name__ == '__main__':
 	querysearch = StringVar()
 	output = StringVar()
 
+	maxCloudWords = StringVar()
+	borderDate = StringVar()
+
 	analyzerGui.geometry(str(GUI_WIDTH)+'x700+300+100')
 	analyzerGui.title('Sentiment analyzer by @matkodurko')
 
 	# get tweets elements
 	mlabel = Label(analyzerGui, text="Get tweets").pack()
-	Label(analyzerGui, text='Since', justify=LEFT).pack()  # .grid(sticky=W, column=1, row=0)
+	Label(analyzerGui, text='Since', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=since).pack()
-	Label(analyzerGui, text='Until', justify=LEFT).pack()  # .grid(sticky=W, column=1, row=0)
+	Label(analyzerGui, text='Until', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=until).pack()
-	Label(analyzerGui, text='Near', justify=LEFT).pack()  # .grid(sticky=W, column=1, row=0)
+	Label(analyzerGui, text='Near', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=near).pack()
-	Label(analyzerGui, text='Within', justify=LEFT).pack()  # .grid(sticky=W, column=1, row=0)
+	Label(analyzerGui, text='Within', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=within).pack()
-	Label(analyzerGui, text='Maxtweets', justify=LEFT).pack()  # .grid(sticky=W, column=1, row=0)
+	Label(analyzerGui, text='Maxtweets', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=maxtweets).pack()
-	Label(analyzerGui, text='Langugae', justify=LEFT).pack()  # .grid(sticky=W, column=1, row=0)
+	Label(analyzerGui, text='Langugae', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=language).pack()
-	Label(analyzerGui, text='Query', justify=LEFT).pack()  # .grid(sticky=W, column=1, row=0)
+	Label(analyzerGui, text='Query', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=querysearch).pack()
-	Label(analyzerGui, text='Output', justify=LEFT).pack()  # .grid(sticky=W, column=1, row=0)
+	Label(analyzerGui, text='Output', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=output).pack()
 	Button(analyzerGui, text="Download!", command=downloadTweets, fg="red").pack()
 	Frame(analyzerGui, height=1, width=GUI_WIDTH, bg="black").pack()
 
 	# execute sentiment analysis
 	mlabel = Label(analyzerGui, text="Sentiment analysis execution").pack()
+
+	Label(analyzerGui, text='Words in cloud', justify=LEFT).pack()
+	Entry(analyzerGui, textvariable=maxCloudWords).pack()
+	Label(analyzerGui, text='Border date', justify=LEFT).pack()
+	Entry(analyzerGui, textvariable=borderDate).pack()
 
 	Button(analyzerGui, text="Execute analysis!", command=executeAnalysis, fg="red").pack()
 	Frame(analyzerGui, height=1, width=GUI_WIDTH, bg="black").pack()
