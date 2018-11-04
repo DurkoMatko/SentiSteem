@@ -16,11 +16,19 @@ from MilestoneClassifier.MulticlassMilestoneClassifier import MulticlassMileston
 from Wordcloud_Generator import Wordcloud_Generator
 from Charts_Plotter import Charts_Plotter
 
+def perdelta(start, end, delta):
+	result = []
+	curr = start
+	while curr < end:
+		result.append(curr)
+		curr += delta
+	return result
+
 def downloadTweets():
 	#build Exporter command
 	cmdCommand = "python2.7 GetOldTweets-python-master/Exporter.py"
-	cmdCommand = cmdCommand + " --since " + since.get()
-	cmdCommand = cmdCommand + " --until " + until.get()
+	cmdCommand = cmdCommand + " --since %%SINCE%%"# + since.get()
+	cmdCommand = cmdCommand + " --until %%UNTIL%%"# + until.get()
 
 	if (len(near.get()) != 0):
 		cmdCommand = cmdCommand + " --near " + near.get()
@@ -30,13 +38,28 @@ def downloadTweets():
 		cmdCommand = cmdCommand + " --lang '" + language.get() + "'"
 
 
-	cmdCommand = cmdCommand + " --maxtweets " + maxtweets.get()
+	cmdCommand = cmdCommand + " --maxtweets %%MAXTWEETS%%"# + maxtweets.get()
 	cmdCommand = cmdCommand + " --querysearch '" + querysearch.get() + "'"
 	outputName = output.get() + "_" + maxtweets.get() + ".csv"
 	cmdCommand = cmdCommand + " --output='" + outputName + "'"
 
-	#execute Exporter command
-	os.popen(cmdCommand).readlines()
+	# create list of of dates incremented by week
+	sinceDate = dt.datetime.strptime(since.get(),'%Y-%m-%d')
+	untilDate = dt.datetime.strptime(until.get(),'%Y-%m-%d')
+	searchDates = perdelta(sinceDate, untilDate, delta=dt.timedelta(weeks=1))
+
+	tweetsPerIteration = int(int(maxtweets.get())/len(searchDates))
+
+	for i in range(0, len(searchDates),1):
+		if i == len(searchDates)-1:
+			break;
+		finalCommand1 = cmdCommand.replace("%%SINCE%%",str(searchDates[i])[0:10])
+		finalCommand2 = finalCommand1.replace("%%UNTIL%%", str(searchDates[i+1])[0:10])
+		finalCommand = finalCommand2.replace("%%MAXTWEETS%%", str(tweetsPerIteration))
+
+		# execute Exporter command
+		#os.popen(finalCommand).readlines()
+		os.system(finalCommand)
 
 	#copy file to configured tweets folder
 	tweetsFolder = config.get('FolderTree', 'tweetsFolder')
@@ -318,17 +341,25 @@ if __name__ == '__main__':
 	# get tweets elements
 	mlabel = Label(analyzerGui, text="Get tweets").pack()
 	Label(analyzerGui, text='Since', justify=LEFT).pack()
-	Entry(analyzerGui, textvariable=since).pack()
+	sinceEntry = Entry(analyzerGui, textvariable=since)
+	sinceEntry.insert(END, '2013-10-10')
+	sinceEntry.pack()
 	Label(analyzerGui, text='Until', justify=LEFT).pack()
-	Entry(analyzerGui, textvariable=until).pack()
+	untilEntry = Entry(analyzerGui, textvariable=until)
+	untilEntry.insert(END, '2018-10-10')
+	untilEntry.pack()
 	Label(analyzerGui, text='Near', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=near).pack()
 	Label(analyzerGui, text='Within', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=within).pack()
 	Label(analyzerGui, text='Maxtweets', justify=LEFT).pack()
-	Entry(analyzerGui, textvariable=maxtweets).pack()
+	maxTweetsEntry = Entry(analyzerGui, textvariable=maxtweets)
+	maxTweetsEntry.insert(END, '15000')
+	maxTweetsEntry.pack()
 	Label(analyzerGui, text='Langugae', justify=LEFT).pack()
-	Entry(analyzerGui, textvariable=language).pack()
+	languageEntry = Entry(analyzerGui, textvariable=language)
+	languageEntry.insert(END, 'en')
+	languageEntry.pack()
 	Label(analyzerGui, text='Query', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=querysearch).pack()
 	Label(analyzerGui, text='Output', justify=LEFT).pack()

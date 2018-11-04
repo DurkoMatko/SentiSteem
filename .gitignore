@@ -1,7 +1,12 @@
 .csv
 .txt
 .pdf
+.png
 .pyc
 .config
 datasets/Sentiment140
+chartsFolder/.csv
+chartsFolder/.xlsx
+chartsFolder/.png
+
 

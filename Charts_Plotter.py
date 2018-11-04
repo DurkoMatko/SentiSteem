@@ -3,7 +3,7 @@ from pandas import Series
 from pandas import DataFrame
 from pandas import TimeGrouper
 from matplotlib import pyplot
-from pandas.tools.plotting import autocorrelation_plot
+from pandas.plotting import autocorrelation_plot
 import numpy as np
 
 class Charts_Plotter:
@@ -52,12 +52,26 @@ class Charts_Plotter:
 		pyplot.close()
 
 	def HeatMap(self):
+		self.data.plot()
 		groups = self.data.groupby(TimeGrouper('A'))
 		years = DataFrame()
+		iter = 1
 		for name, group in groups:
-			years[name.year] = group.values
+			extendedValues = group.values
+
+			# fill zeros for the sentiment of months of the first analyzed year
+			if iter == 1:
+				extendedValues = np.append(np.zeros(12 - len(group.values)), group.values)
+			# fill zeros for the sentiment of months of the last analyzed year
+			if iter == len(groups):
+				extendedValues = np.append(group.values, np.zeros(12 - len(group.values)))
+
+			years[name.year] = extendedValues
+			pyplot.ylabel(name.year)
+			iter += 1
 		years = years.T
 		pyplot.matshow(years, interpolation=None, aspect='auto')
+		pyplot.colorbar(heatmap)
 		pyplot.savefig(self.savePath + "/heatMap.png")
 		pyplot.close()
 
