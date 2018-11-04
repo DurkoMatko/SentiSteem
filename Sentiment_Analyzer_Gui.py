@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 from dateutil import parser
 from MilestoneClassifier.MulticlassMilestoneClassifier import MulticlassMilestoneClassifier, PredictionMode, TrainingMode
 from Wordcloud_Generator import Wordcloud_Generator
+from Charts_Plotter import Charts_Plotter
 
 def downloadTweets():
 	#build Exporter command
@@ -138,6 +139,7 @@ def executeAnalysis():
 			plotPolynomials(minDate=min(dates), passedDays=flooredPassedDays, scores=flooredScores, chartsFolder=chartsFolder, picNum=2)
 
 			saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder)
+			saveDataToCsv(dates, scores, flooredDates, flooredScores, chartsFolder)
 
 			csvFile.close()
 
@@ -183,6 +185,19 @@ def saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder):
 		row += 1
 
 	workbook.close()
+
+def saveDataToCsv(dates, scores, flooredDates, flooredScores, chartsFolder):
+	csv = open(chartsFolder + "/scores.csv", "w")
+
+	columnTitleRow = "Floored date, Floored scores\n"
+	csv.write(columnTitleRow)
+
+	for date, score in zip(flooredDates, flooredScores):
+		dateString = '%s/%s/%s' % (date.month, date.day, date.year)
+		row = dateString + "," + str(score) + "\n"
+		csv.write(row)
+
+	csv.close()
 
 
 def convertDatesToPassedDays(dates):
@@ -269,6 +284,15 @@ def plotPolynomials(minDate,passedDays,scores,chartsFolder,picNum):
     plt.savefig(chartsFolder+"/"+str(picNum)+".png")
     plt.close()
 
+def createCharts():
+	chartsFolder = config.get('FolderTree', 'chartsFolder')
+	plotter = Charts_Plotter(chartsFolder=chartsFolder)
+
+	plotter.LinePlot();
+	plotter.YearlyLinePlot();
+	plotter.Histogram();
+	plotter.HeatMap();
+	plotter.Autocorrelation();
 
 if __name__ == '__main__':
 	config = ConfigParser.ConfigParser()
@@ -316,12 +340,20 @@ if __name__ == '__main__':
 	mlabel = Label(analyzerGui, text="Sentiment analysis execution").pack()
 
 	Label(analyzerGui, text='Words in cloud', justify=LEFT).pack()
-	Entry(analyzerGui, textvariable=maxCloudWords).pack()
+	maxCloudWordsEntry = Entry(analyzerGui, textvariable=maxCloudWords)
+	maxCloudWordsEntry.insert(END, '20')
+	maxCloudWordsEntry.pack()
+
 	Label(analyzerGui, text='Border date', justify=LEFT).pack()
-	Entry(analyzerGui, textvariable=borderDate).pack()
+	borderDateEntry = Entry(analyzerGui, textvariable=borderDate)
+	borderDateEntry.insert(END, '2014-10-10')
+	borderDateEntry.pack()
 
 	Button(analyzerGui, text="Execute analysis!", command=executeAnalysis, fg="red").pack()
 	Frame(analyzerGui, height=1, width=GUI_WIDTH, bg="black").pack()
+
+	Button(analyzerGui, text="Create charts from CSV data", command=createCharts, fg="red").pack()
+
 
 
 	analyzerGui.mainloop()
