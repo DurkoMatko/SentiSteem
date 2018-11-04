@@ -315,6 +315,7 @@ def createCharts():
 	plotter.YearlyLinePlot();
 	plotter.Histogram();
 	plotter.HeatMap();
+	plotter.HeatMapSquared();
 	plotter.Autocorrelation();
 
 if __name__ == '__main__':

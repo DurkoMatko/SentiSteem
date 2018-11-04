@@ -54,6 +54,11 @@ class Charts_Plotter:
 	def HeatMap(self):
 		self.data.plot()
 		groups = self.data.groupby(TimeGrouper('A'))
+		yearLabels = []
+		for key, value in groups.groups.iteritems():
+			yearLabels.append(str(key.year))
+		yearLabels.sort()
+
 		years = DataFrame()
 		iter = 1
 		for name, group in groups:
@@ -71,9 +76,46 @@ class Charts_Plotter:
 			iter += 1
 		years = years.T
 		pyplot.matshow(years, interpolation=None, aspect='auto')
-		pyplot.colorbar(heatmap)
+		#pyplot.colorbar(heatmap)
 		pyplot.savefig(self.savePath + "/heatMap.png")
 		pyplot.close()
+
+	def HeatMapSquared(self):
+		groups = self.data.groupby(TimeGrouper('A'))
+		column_labels = ["Jan","Feb","Mar","Apr","Mai","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
+
+		finalData = []
+		years=[]
+		iter = 1
+		for name, group in groups:
+			extendedValues = group.values
+
+			# fill zeros for the sentiment of months of the first analyzed year
+			if iter == 1:
+				extendedValues = np.append(np.zeros(12 - len(group.values)), group.values)
+			# fill zeros for the sentiment of months of the last analyzed year
+			if iter == len(groups):
+				extendedValues = np.append(group.values, np.zeros(12 - len(group.values)))
+
+			finalData.append(extendedValues)
+			years.append(str(name.year))
+			iter += 1
+
+		data = np.array(finalData)
+		fig, axis = pyplot.subplots()
+		heatmap = axis.pcolor(data)  #,cmap=pyplot.cm.YlOrRd
+
+		axis.set_yticks(np.arange(data.shape[0]) + 0.5, minor=False)
+		axis.set_xticks(np.arange(data.shape[1]) + 0.5, minor=False)
+
+		axis.invert_yaxis()
+
+		axis.set_yticklabels(years, minor=False)
+		axis.set_xticklabels(column_labels, minor=False)
+
+		fig.set_size_inches(11.03, 3.5)
+		pyplot.colorbar(heatmap)
+		pyplot.savefig(self.savePath + "/heatMapSquared.png", dpi=100)
 
 	def Autocorrelation(self):
 		autocorrelation_plot(self.data)
