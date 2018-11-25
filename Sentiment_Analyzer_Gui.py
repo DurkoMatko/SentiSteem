@@ -16,6 +16,22 @@ from MilestoneClassifier.MulticlassMilestoneClassifier import MulticlassMileston
 from Wordcloud_Generator import Wordcloud_Generator
 from Charts_Plotter import Charts_Plotter
 
+from geoplotlib.colors import ColorMap
+import geoplotlib
+from geoplotlib.utils import read_csv, BoundingBox, DataAccessObject
+import json
+
+def get_color(properties):
+    key = str(int(properties['STATE'])) + properties['COUNTY']
+    if key in unemployment:
+        return cmap.to_color(unemployment.get(key), .15, 'lin')
+    else:
+        return [0, 0, 0, 0]
+
+
+with open('data/unemployment.json') as fin:
+    unemployment = json.load(fin)
+
 def perdelta(start, end, delta):
 	result = []
 	curr = start
@@ -39,8 +55,9 @@ def downloadTweets():
 
 
 	cmdCommand = cmdCommand + " --maxtweets %%MAXTWEETS%%"# + maxtweets.get()
-	cmdCommand = cmdCommand + " --querysearch '" + querysearch.get() + "'"
-	outputName = output.get() + "_" + maxtweets.get() + ".csv"
+	queryKeyword = querysearch.get()
+	cmdCommand = cmdCommand + " --querysearch '" + queryKeyword + "'"
+	outputName = queryKeyword + "_" + maxtweets.get() + ".csv"
 	cmdCommand = cmdCommand + " --output='" + outputName + "'"
 
 	# create list of of dates incremented by week
@@ -162,13 +179,10 @@ def executeAnalysis():
 			plotPolynomials(minDate=min(dates), passedDays=flooredPassedDays, scores=flooredScores, chartsFolder=chartsFolder, picNum=2)
 
 			saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder)
-			saveDataToCsv(dates, scores, flooredDates, flooredScores, chartsFolder)
+			saveDataToCsv(dates, scores, chartsFolder, "scores.csv")
+			saveDataToCsv(flooredDates, flooredScores, chartsFolder, "floored_scores.csv")
 
 			csvFile.close()
-
-
-	wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'))
-	wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
 
 def saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder):
 	# Create a workbook and add a worksheet.
@@ -209,13 +223,13 @@ def saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder):
 
 	workbook.close()
 
-def saveDataToCsv(dates, scores, flooredDates, flooredScores, chartsFolder):
-	csv = open(chartsFolder + "/scores.csv", "w")
+def saveDataToCsv(dates, scores, chartsFolder, fileName):
+	csv = open(chartsFolder + "/" + fileName, "w")
 
 	columnTitleRow = "Floored date, Floored scores\n"
 	csv.write(columnTitleRow)
 
-	for date, score in zip(flooredDates, flooredScores):
+	for date, score in zip(dates, scores):
 		dateString = '%s/%s/%s' % (date.month, date.day, date.year)
 		row = dateString + "," + str(score) + "\n"
 		csv.write(row)
@@ -309,13 +323,16 @@ def plotPolynomials(minDate,passedDays,scores,chartsFolder,picNum):
 
 def createCharts():
 	chartsFolder = config.get('FolderTree', 'chartsFolder')
-	plotter = Charts_Plotter(chartsFolder=chartsFolder)
 
+	#wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'))
+	#wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
+
+	plotter = Charts_Plotter(chartsFolder=chartsFolder)
 	plotter.LinePlot();
 	plotter.YearlyLinePlot();
 	plotter.Histogram();
 	plotter.HeatMap();
-	plotter.HeatMapSquared();
+	plotter.HeatMapWeekly();
 	plotter.Autocorrelation();
 
 if __name__ == '__main__':
@@ -331,7 +348,6 @@ if __name__ == '__main__':
 	maxtweets = StringVar()
 	language = StringVar()
 	querysearch = StringVar()
-	output = StringVar()
 
 	maxCloudWords = StringVar()
 	borderDate = StringVar()
@@ -343,11 +359,11 @@ if __name__ == '__main__':
 	mlabel = Label(analyzerGui, text="Get tweets").pack()
 	Label(analyzerGui, text='Since', justify=LEFT).pack()
 	sinceEntry = Entry(analyzerGui, textvariable=since)
-	sinceEntry.insert(END, '2013-10-10')
+	sinceEntry.insert(END, '2013-01-01')
 	sinceEntry.pack()
 	Label(analyzerGui, text='Until', justify=LEFT).pack()
 	untilEntry = Entry(analyzerGui, textvariable=until)
-	untilEntry.insert(END, '2018-10-10')
+	untilEntry.insert(END, '2017-12-31')
 	untilEntry.pack()
 	Label(analyzerGui, text='Near', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=near).pack()
@@ -363,14 +379,15 @@ if __name__ == '__main__':
 	languageEntry.pack()
 	Label(analyzerGui, text='Query', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=querysearch).pack()
-	Label(analyzerGui, text='Output', justify=LEFT).pack()
-	Entry(analyzerGui, textvariable=output).pack()
 	Button(analyzerGui, text="Download!", command=downloadTweets, fg="red").pack()
 	Frame(analyzerGui, height=1, width=GUI_WIDTH, bg="black").pack()
 
 	# execute sentiment analysis
 	mlabel = Label(analyzerGui, text="Sentiment analysis execution").pack()
+	Button(analyzerGui, text="Execute analysis!", command=executeAnalysis, fg="red").pack()
+	Frame(analyzerGui, height=1, width=GUI_WIDTH, bg="black").pack()
 
+	# generate charts
 	Label(analyzerGui, text='Words in cloud', justify=LEFT).pack()
 	maxCloudWordsEntry = Entry(analyzerGui, textvariable=maxCloudWords)
 	maxCloudWordsEntry.insert(END, '20')
@@ -381,11 +398,6 @@ if __name__ == '__main__':
 	borderDateEntry.insert(END, '2014-10-10')
 	borderDateEntry.pack()
 
-	Button(analyzerGui, text="Execute analysis!", command=executeAnalysis, fg="red").pack()
-	Frame(analyzerGui, height=1, width=GUI_WIDTH, bg="black").pack()
-
 	Button(analyzerGui, text="Create charts from CSV data", command=createCharts, fg="red").pack()
-
-
 
 	analyzerGui.mainloop()

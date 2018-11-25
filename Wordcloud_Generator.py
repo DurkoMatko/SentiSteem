@@ -61,7 +61,7 @@ class Wordcloud_Generator:
 
 		wordcloud = WordCloud(stopwords=STOPWORDS, max_words=int(maxCloudWords)).generate(words)
 		wordcloud2 = WordCloud(stopwords=STOPWORDS, background_color='white', max_words=int(maxCloudWords)).generate(wordsAfter)
-		self.plotWordcloud(wordcloud, wordcloud2,chartsFolder,3)
+		self.plotWordcloud(wordcloud, wordcloud2,chartsFolder,'CommonWords')
 
 		#now plot the same but without shared words
 		uniqueWords = self.getUniqueWords(words, wordsAfter)
@@ -69,7 +69,7 @@ class Wordcloud_Generator:
 		uniqueWordsAfter = self.getUniqueWords(wordsAfter, words)
 		wordcloud = WordCloud(stopwords=STOPWORDS, max_words=int(maxCloudWords)).generate(uniqueWords)
 		wordcloud2 = WordCloud(stopwords=STOPWORDS, background_color='white', max_words=int(maxCloudWords)).generate(uniqueWordsAfter)
-		self.plotWordcloud(wordcloud, wordcloud2, chartsFolder, 4)
+		self.plotWordcloud(wordcloud, wordcloud2, chartsFolder, 'UniqueWords')
 
 	#compares two comma separated strings and returns just unique words from the first string
 	def getUniqueWords(self,commaSeparatedWords1, commaSeparatedWords2):
@@ -88,7 +88,7 @@ class Wordcloud_Generator:
 
 	#return word.lower() in self.commonWords;
 
-	def plotWordcloud(self,before, after, chartsFolder, picNum):
+	def plotWordcloud(self,before, after, chartsFolder, picName):
 		plt.subplot(211)
 		plt.title('Before')
 		plt.axis('off')
@@ -99,6 +99,6 @@ class Wordcloud_Generator:
 		plt.axis('off')
 		plt.imshow(after)
 
-		plt.savefig(chartsFolder + "/" + str(picNum) + ".png")
+		plt.savefig(chartsFolder + "/" + picName + ".png")
 		plt.close()
 
