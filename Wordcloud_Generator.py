@@ -59,6 +59,15 @@ class Wordcloud_Generator:
 							else:
 								wordsAfter = wordsAfter + "," + word
 
+
+		#FIX: Wordcloud interprets word HELLO-WORLD as two separate words, therefore I'm replacing "-" with empty string to make the word unique
+		words = words.replace("-", "")
+		wordsAfter = wordsAfter.replace("-", "")
+
+		#FIX: "/" interpreted as space as well, causing word STATUS to be popular
+		words = words.replace("/", "")
+		wordsAfter = wordsAfter.replace("/", "")
+
 		wordcloud = WordCloud(stopwords=STOPWORDS, max_words=int(maxCloudWords)).generate(words)
 		wordcloud2 = WordCloud(stopwords=STOPWORDS, background_color='white', max_words=int(maxCloudWords)).generate(wordsAfter)
 		self.plotWordcloud(wordcloud, wordcloud2,chartsFolder,'CommonWords')
@@ -74,9 +83,15 @@ class Wordcloud_Generator:
 	#compares two comma separated strings and returns just unique words from the first string
 	def getUniqueWords(self,commaSeparatedWords1, commaSeparatedWords2):
 		words1 = commaSeparatedWords1.split(",")
+		words1 = [x.upper() for x in words1]
 		words2 = commaSeparatedWords2.split(",")
-		uniqueWordsList = list(set(words1) - set(words2))
+		words2 = [x.upper() for x in words2]
+		wordset1 = set(words1)
+		wordset2 = set(words2)
+		uniqueWordsList = list(wordset1 - wordset2)
 		#return uniqueWordsList
+		if 'MCGREGOR' in uniqueWordsList:
+			hes = True;
 		return ','.join(map(str, uniqueWordsList))
 
 	def isCommon(self,word):

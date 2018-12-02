@@ -21,17 +21,6 @@ import geoplotlib
 from geoplotlib.utils import read_csv, BoundingBox, DataAccessObject
 import json
 
-def get_color(properties):
-    key = str(int(properties['STATE'])) + properties['COUNTY']
-    if key in unemployment:
-        return cmap.to_color(unemployment.get(key), .15, 'lin')
-    else:
-        return [0, 0, 0, 0]
-
-
-with open('data/unemployment.json') as fin:
-    unemployment = json.load(fin)
-
 def perdelta(start, end, delta):
 	result = []
 	curr = start
@@ -171,13 +160,6 @@ def executeAnalysis():
 			reader.next()  #pass headers
 			dates, scores, flooredDates, flooredScores = getDatesAndScores(reader=reader, classifier=myClassifier)
 
-			#this plot looks too chaotic, data need to be aggregated
-			#passedDays = convertDatesToPassedDays(dates)
-			#plotPolynomials(minDate=min(dates), passedDays=passedDays, scores=scores, mypath=mypath, picNum=1)
-
-			flooredPassedDays = convertDatesToPassedDays(dates=flooredDates)
-			plotPolynomials(minDate=min(dates), passedDays=flooredPassedDays, scores=flooredScores, chartsFolder=chartsFolder, picNum=2)
-
 			saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder)
 			saveDataToCsv(dates, scores, chartsFolder, "scores.csv")
 			saveDataToCsv(flooredDates, flooredScores, chartsFolder, "floored_scores.csv")
@@ -253,74 +235,6 @@ def convertPassedDaysToDates(minDate,days):
 
     return dates
 
-def plotPolynomials(minDate,passedDays,scores,chartsFolder,picNum):
-    x = passedDays
-    y = scores
-    print "max x:" + str(max(x))
-    # calculate polynomial
-    z2 = np.polyfit(x, y, 2)
-    z3 = np.polyfit(x, y, 3)
-    z4 = np.polyfit(x, y, 4)
-    f2 = np.poly1d(z2)
-    f3 = np.poly1d(z3)
-    f4 = np.poly1d(z4)
-
-    # calculate new x's and y's for regression
-    x_new = np.linspace(0, max(x), 200)
-    y_new2 = f2(x_new)
-    y_new3 = f3(x_new)
-    y_new4 = f4(x_new)
-
-    #revert original x-axis passed days to date format
-    original_dates = convertPassedDaysToDates(minDate=minDate,days=passedDays)
-
-    #revert regression x-axis values to datetime format
-    regression_dates = convertPassedDaysToDates(minDate=minDate, days=x_new)
-
-    # set x-axis labels to datetime format
-    fig, ax = plt.subplots()
-    fig.autofmt_xdate()
-
-    # plot original and regression data
-    plt.plot(original_dates, y, 'o')
-    plt.ylim(ymax=max(y)+0.025, ymin=min(y)-0.025)
-    plt.grid()
-
-    plt.plot(regression_dates, y_new2, '.', label='quadratic polynomial fit')
-    plt.plot(regression_dates, y_new3, '-',label='cubic polynomial fit')
-    plt.plot(regression_dates,y_new4, '--',label='quartic polynomial fit')
-
-
-    # if it is cryptocurrency, get history prices
-    #cryptoPricesPath = os.path.join(mypath, 'cryptoPrices')
-    #priceFiles = [f for f in os.listdir(cryptoPricesPath) if os.path.isfile(os.path.join(cryptoPricesPath, f))]
-
-    #if projectName in priceFiles:
-    #    #get prices and dates
-    #    priceDates,prices = getCryptoPrices(projectName=projectName, cryptoPricesPath=cryptoPricesPath)
-    #    #insert first price 0 to make the graph nicer
-    #    priceDates.insert(len(priceDates), min(original_dates))
-    #    prices.insert(len(prices),0)
-
-     #   #add secondary y-axis
-    #    ax2 = ax.twinx()
-    #    ax2.plot(priceDates, prices,'grey',label='Price')
-
-    legend = ax.legend(loc='lower left', shadow=True)
-    # The frame is matplotlib.patches.Rectangle instance surrounding the legend.
-    frame = legend.get_frame()
-    frame.set_facecolor('0.90')
-
-    # Set the fontsize
-    for label in legend.get_texts():
-        label.set_fontsize('large')
-    for label in legend.get_lines():
-        label.set_linewidth(1.5)  # the legend line width
-    plt.title("")
-    #plt.show()
-    plt.savefig(chartsFolder+"/"+str(picNum)+".png")
-    plt.close()
-
 def createCharts():
 	chartsFolder = config.get('FolderTree', 'chartsFolder')
 
@@ -328,12 +242,13 @@ def createCharts():
 	#wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
 
 	plotter = Charts_Plotter(chartsFolder=chartsFolder)
-	plotter.LinePlot();
-	plotter.YearlyLinePlot();
-	plotter.Histogram();
+	plotter.sentimentLinechart();
+	#plotter.LinePlot();
+	#plotter.YearlyLinePlot();
+	#plotter.Histogram();
 	plotter.HeatMap();
 	plotter.HeatMapWeekly();
-	plotter.Autocorrelation();
+	#plotter.Autocorrelation();
 
 if __name__ == '__main__':
 	config = ConfigParser.ConfigParser()
@@ -395,7 +310,7 @@ if __name__ == '__main__':
 
 	Label(analyzerGui, text='Border date', justify=LEFT).pack()
 	borderDateEntry = Entry(analyzerGui, textvariable=borderDate)
-	borderDateEntry.insert(END, '2014-10-10')
+	borderDateEntry.insert(END, '2015-10-10')
 	borderDateEntry.pack()
 
 	Button(analyzerGui, text="Create charts from CSV data", command=createCharts, fg="red").pack()
