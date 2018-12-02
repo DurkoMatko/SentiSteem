@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7522b75c-653f-4e11-97e6-5ec6ed9db05a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chartsFolder/heatMap.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chartsFolder/scores.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chartsFolder/scores.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/yii.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Charts/scores.xlsx" afterPath="$PROJECT_DIR$/Charts/scores.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Charts/sentiment.png" afterPath="$PROJECT_DIR$/Charts/sentiment.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Charts_Plotter.py" afterPath="$PROJECT_DIR$/Charts_Plotter.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Reports/report.txt" afterPath="$PROJECT_DIR$/Reports/report.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Reports/report_template.txt" afterPath="$PROJECT_DIR$/Reports/report_template.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sentiment_Analyzer_Gui.py" afterPath="$PROJECT_DIR$/Sentiment_Analyzer_Gui.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.config" afterPath="$PROJECT_DIR$/app.config" />
     </list>
@@ -18,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Sentiment_Analyzer_Gui.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Sentiment_Analyzer_Gui.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Sentiment_Analyzer_Gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="100" column="44" lean-forward="false" selection-start-line="100" selection-start-column="44" selection-end-line="100" selection-end-column="44" />
+            <state relative-caret-position="472">
+              <caret line="275" column="85" lean-forward="false" selection-start-line="275" selection-start-column="85" selection-end-line="275" selection-end-column="85" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -33,18 +35,18 @@
       <file leaf-file-name="app.config" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.config">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+            <state relative-caret-position="72">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Charts_Plotter.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Charts_Plotter.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Charts_Plotter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+            <state relative-caret-position="144">
+              <caret line="185" column="45" lean-forward="true" selection-start-line="185" selection-start-column="45" selection-end-line="185" selection-end-column="45" />
               <folding>
                 <element signature="e#24#84#0" expanded="true" />
               </folding>
@@ -88,6 +90,9 @@
       <find>plotPolynomials</find>
       <find>downloadTweets</find>
       <find>language.g</find>
+      <find>print</find>
+      <find>savePath</find>
+      <find>Charts_Plotter</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -97,9 +102,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Wordcloud_Generator.py" />
-        <option value="$PROJECT_DIR$/Charts_Plotter.py" />
         <option value="$PROJECT_DIR$/app.config" />
         <option value="$PROJECT_DIR$/Sentiment_Analyzer_Gui.py" />
+        <option value="$PROJECT_DIR$/Charts_Plotter.py" />
       </list>
     </option>
   </component>
@@ -143,7 +148,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/zuza.py" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -175,9 +180,31 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="zuza" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Desktop" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Sentiment_Analyzer" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Desktop/zuza.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Python.Sentiment_Analyzer_Gui" />
+      <item index="1" class="java.lang.String" itemvalue="Python.zuza" />
+    </list>
     <recent_temporary>
-      <list size="1">
+      <list size="2">
         <item index="0" class="java.lang.String" itemvalue="Python.Sentiment_Analyzer_Gui" />
+        <item index="1" class="java.lang.String" itemvalue="Python.zuza" />
       </list>
     </recent_temporary>
   </component>
@@ -233,7 +260,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Sentiment_Analyzer_Gui.py</url>
-          <line>116</line>
+          <line>118</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -263,7 +290,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Charts_Plotter.py</url>
-          <line>253</line>
+          <line>268</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -311,16 +338,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Charts_Plotter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-          <folding>
-            <element signature="e#24#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python2.7/lib-tk/Tkinter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="531">
@@ -329,20 +346,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Desktop/zuza.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="48" column="19" lean-forward="true" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.config">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        <state relative-caret-position="72">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Sentiment_Analyzer_Gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="100" column="44" lean-forward="false" selection-start-line="100" selection-start-column="44" selection-end-line="100" selection-end-column="44" />
+        <state relative-caret-position="472">
+          <caret line="275" column="85" lean-forward="false" selection-start-line="275" selection-start-column="85" selection-end-line="275" selection-end-column="85" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Charts_Plotter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="185" column="45" lean-forward="true" selection-start-line="185" selection-start-column="45" selection-end-line="185" selection-end-column="45" />
+          <folding>
+            <element signature="e#24#84#0" expanded="true" />
           </folding>
         </state>
       </provider>

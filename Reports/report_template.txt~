@@ -1,6 +1,22 @@
-Today's report parameters are:
+[SentiSteem report #<REPORT_COUNT> - ]
+<b><i>Hello world!</i>  Welcome to another report where I'm using machine learning to analyze tweets about specified topic and present results in form of various and easy to understand charts. The sentiment analysis algorithm has been developed as part of my Master Thesis in 2017/2018 and these reports are currently being published exclusively here on Steemit. Let's get straight into it!</b>
 
-Keyword: <KEYWORD>
-Tweets since: <TWEETS_SINCE>
-Tweets to: <TWEETS_TO>
+![text10.png](https://cdn.steemitimages.com/DQmd9n1B8hpaQPjHwweHKzr5bYSkWaZshJGzsZJ28yzLaUm/text10.png)
+
+<h3>Parameters</h3>Today's analysis has been executed on tweets which contain word <b>"<KEYWORD>"</b> and were published <b>between <TWEETS_SINCE> and <TWEETS_TO></b>. Detailed specification of the data is shown in the following list:
+<ul>
+<li>Keyword: <KEYWORD></li>
+<li>From: <TWEETS_SINCE></li>
+<li>To: <TWEETS_TO></li>
+<li>Number of analyzed tweets: <TWEETS_NUMBER></li>
+<li>Language: <LANGUAGE></li>
+<li>Geographical location: <NEAR> <WITHIN> </li>
+</ul>
+
+<h3>Results</h3>
+
+
+<center><h3>Thanks for reading! Matko.</h3></center>
+</hr>
+</h3>
 

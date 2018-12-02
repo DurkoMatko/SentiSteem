@@ -9,11 +9,12 @@ import math
 
 class Charts_Plotter:
 
-	def __init__(self, chartsFolder):
+	def __init__(self, chartsFolder, reportFileName):
 		self.savePath = chartsFolder
 		self.floored_data = Series.from_csv(chartsFolder + '/floored_scores.csv', header=0)
 		self.data = Series.from_csv(chartsFolder + '/scores.csv', header=0)
 		self.excelData = pd.read_excel(chartsFolder + '/scores.xlsx')
+		self.reportFileName = reportFileName
 
 	def LinePlot(self):
 		self.floored_data.plot()
@@ -129,6 +130,13 @@ class Charts_Plotter:
 		pyplot.colorbar(heatmap)
 		pyplot.savefig(self.savePath + "/heatMap.png", dpi=100)
 
+		#once plotted, replace placeholders in the post
+		with open(self.reportFileName) as f:
+			newText = f.read().replace('<HEATMAP_MONTHLY_HIGHEST>', "{0:.2f}".format(round(np.max(data),2)))
+			newText = newText.replace('<HEATMAP_MONTHLY_LOWEST>', "{0:.2f}".format(round(np.min(data),2)))
+		with open(self.reportFileName, "w") as f:
+			f.write(newText)
+
 	def HeatMapWeekly(self):
 		groups = self.data.groupby(TimeGrouper('A'))
 		finalData = []
@@ -180,6 +188,13 @@ class Charts_Plotter:
 		pyplot.colorbar(heatmap)
 		pyplot.xticks(fontsize=7)
 		pyplot.savefig(self.savePath + "/heatMapWeekly.png", dpi=100)
+
+		# once plotted, replace placeholders in the post
+		with open(self.reportFileName) as f:
+			newText = f.read().replace('<HEATMAP_WEEKLY_HIGHEST>', "{0:.2f}".format(round(np.max(data),2)))
+			newText = newText.replace('<HEATMAP_WEEKLY_LOWEST>', "{0:.2f}".format(round(np.min(data),2)))
+		with open(self.reportFileName, "w") as f:
+			f.write(newText)
 
 	def Autocorrelation(self):
 		autocorrelation_plot(self.floored_data)

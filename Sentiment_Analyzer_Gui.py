@@ -73,7 +73,9 @@ def downloadTweets():
 
 	#if we got here, we can create copy of report_template.txt file and replace placeholders
 	reportsFolder = config.get('FolderTree', 'reportsFolder')
-	reportFileName = reportsFolder + '/report.txt'
+	reportFile = config.get('FolderTree', 'reportFile')
+
+	reportFileName = reportsFolder + '/' + reportFile
 	shutil.copy2(reportsFolder + "/" + config.get('FolderTree', 'templateFile'), reportFileName)
 
 	#replace report parameters
@@ -266,11 +268,12 @@ def convertPassedDaysToDates(minDate,days):
 
 def createCharts():
 	chartsFolder = config.get('FolderTree', 'chartsFolder')
+	reportFileName = config.get('FolderTree', 'reportsFolder') + "/" + config.get('FolderTree', 'reportFile')
 
 	#wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'))
 	#wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
 
-	plotter = Charts_Plotter(chartsFolder=chartsFolder)
+	plotter = Charts_Plotter(chartsFolder=chartsFolder, reportFileName=reportFileName)
 	plotter.sentimentLinechart();
 	#plotter.LinePlot();
 	#plotter.YearlyLinePlot();

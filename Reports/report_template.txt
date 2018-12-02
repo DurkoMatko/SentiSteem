@@ -1,5 +1,7 @@
 [SentiSteem report #<REPORT_COUNT> - ]
-<b><i>Hello world!</i>  Welcome to another report where I'm using machine learning to analyze tweets about specified topic and present results in form of various and easy to understand charts. The sentiment analysis algorithm has been developed as part of my Master Thesis in 2017/2018 and these reports are currently being published exclusively here on Steemit. Let's get straight into it!</b>
+<b><i>Hello world!</i>  Welcome to another report where I'm using machine learning to analyze tweets about specified topic and present results in form of various and easy to understand charts. The sentiment analysis algorithm has been developed as part of my Master Thesis in 2017/2018. </b>
+
+<center><h4>This report is currently being published exclusively here on Steemit.</h4></center>
 
 ![text10.png](https://cdn.steemitimages.com/DQmd9n1B8hpaQPjHwweHKzr5bYSkWaZshJGzsZJ28yzLaUm/text10.png)
 
@@ -13,8 +15,26 @@
 <li>Geographical location: <NEAR> <WITHIN> </li>
 </ul>
 
-<h3>Results</h3>
+![text01.png](https://cdn.steemitimages.com/DQmZSJ8jY8rVQrN3jGZcPrqeJpTHGW68AkyhEipSrqspmaX/text01.png)
 
+<h1>Results</h1><h3>Sentiment </h3></hr>After downloading <TWEETS_NUMBER> tweets between the specified dates, sentiment analysis has been executed on each and every one of those tweets. Sentiment score has been then <b>aggregated over weeks and months</b>, to lower the granularity of results on the time axis and then <b>plotted as a following linechart. </b>
+
+-------------------LINECHART---------------------------------------
+<sup>Sentiment of tweets for keyword <b>"<KEYWORD>"</b></sup>
+
+<b><i>My subjective comment on the chart:</i></b> It's down
+
+To show the general trend/pattern in the sentiment, linechart works great. We can see the bigger timeframe and estimate the long-term direction. But if you're interested in particular month or week, it's hard and in case of weeks actually impossible to see the change. Has an athlete put the great performance in particular match? Has the brand/company released a new line of product? So see such low lever changes, following 2 heatmaps are to be used.
+
+-------------------HEATMAP_MONTHLY---------------------------------------
+<sup>Chart shows average sentiment per month where <HEATMAP_MONTHLY_LOWEST> is the worst and <HEATMAP_MONTHLY_HIGHEST> the best achieved score</sup>
+
+<b><i>My subjective comment on the chart:</i></b> It's down
+
+-------------------HEATMAP_WEEKLY---------------------------------------
+<sup>Chart shows average sentiment per week where <HEATMAP_WEEKLY_LOWEST> is the worst and <HEATMAP_WEEKLY_HIGHEST> the best achieved score</sup>
+
+<b><i>My subjective comment on the chart:</i></b> It's down
 
 <center><h3>Thanks for reading! Matko.</h3></center>
 </hr>
