@@ -65,11 +65,40 @@ def downloadTweets():
 
 		# execute Exporter command
 		#os.popen(finalCommand).readlines()
-		os.system(finalCommand)
+		#os.system(finalCommand)
 
 	#copy file to configured tweets folder
 	tweetsFolder = config.get('FolderTree', 'tweetsFolder')
-	shutil.move(outputName, tweetsFolder+"/"+outputName)
+	#shutil.move(outputName, tweetsFolder+"/"+outputName)
+
+	#if we got here, we can create copy of report_template.txt file and replace placeholders
+	reportsFolder = config.get('FolderTree', 'reportsFolder')
+	reportFileName = reportsFolder + '/report.txt'
+	shutil.copy2(reportsFolder + "/" + config.get('FolderTree', 'templateFile'), reportFileName)
+
+	#replace report parameters
+	with open(reportFileName) as f:
+		newText = f.read().replace('<KEYWORD>', queryKeyword)
+		newText = newText.replace('<TWEETS_SINCE>', since.get())
+		newText = newText.replace('<TWEETS_TO>', until.get())
+		newText = newText.replace('<TWEETS_NUMBER>', maxtweets.get())
+
+		if (len(language.get()) != 0):
+			newText = newText.replace('<LANGUAGE>', language.get())
+		else:
+			newText = newText.replace('<LANGUAGE>', "Not specified")
+
+		if (len(near.get()) != 0):
+			newText = newText.replace('<NEAR>', near.get())
+		else:
+			newText = newText.replace('<NEAR>', "Not specified")
+
+		if (len(within.get()) != 0):
+			newText = newText.replace('<WITHIN>', within.get())
+		else:
+			newText = newText.replace('<WITHIN>', "")
+
+	with open(reportFileName, "w") as f: f.write(newText)
 
 ##################### PLOTTING ###################################
 def getDatesAndScores(reader,classifier):
@@ -250,6 +279,12 @@ def createCharts():
 	plotter.HeatMapWeekly();
 	#plotter.Autocorrelation();
 
+
+def executeAllSteps():
+	downloadTweets()
+	executeAnalysis()
+	createCharts()
+
 if __name__ == '__main__':
 	config = ConfigParser.ConfigParser()
 	config.readfp(open(r'app.config'))
@@ -314,5 +349,8 @@ if __name__ == '__main__':
 	borderDateEntry.pack()
 
 	Button(analyzerGui, text="Create charts from CSV data", command=createCharts, fg="red").pack()
+	Frame(analyzerGui, height=1, width=GUI_WIDTH, bg="black").pack()
+
+	Button(analyzerGui, text="Execute all 3 steps", command=executeAllSteps, fg="red").pack()
 
 	analyzerGui.mainloop()
