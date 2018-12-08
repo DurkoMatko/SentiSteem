@@ -14,7 +14,7 @@ from dateutil import parser
 
 class Wordcloud_Generator:
 
-	def __init__(self, commonWords):
+	def __init__(self, commonWords, reportFileName, tweetsFolder):
 		self.emoji_pattern = re.compile("["
         u"\U0001F600-\U0001F64F"  # emoticons
         u"\U0001F300-\U0001F5FF"  # symbols & pictographs
@@ -31,17 +31,19 @@ class Wordcloud_Generator:
 			self.sentiment_dict[word] = int(score)
 
 		self.mypath = os.path.dirname(__file__)
+		self.reportFileName = reportFileName
+		self.tweetsFolder = tweetsFolder
 
-	def createWordcloud(self, chartsFolder, maxCloudWords, borderDate):
+	def createWordcloud(self, chartsFolder, maxCloudWords, borderDateString):
 		# strings to store all the words from tweets
 		words = ""
 		wordsAfter = ""
 
-		borderDate = parser.parse(borderDate)
+		borderDate = parser.parse(borderDateString)
 
-		tweetFilesPath = os.path.join(self.mypath, 'tweets_To_Analyze')
+		#read tweets
+		tweetFilesPath = os.path.join(self.mypath, self.tweetsFolder)
 		tweetFiles = [f for f in os.listdir(tweetFilesPath) if os.path.isfile(os.path.join(tweetFilesPath, f))]
-
 		for file in tweetFiles:
 			with open(os.path.join(tweetFilesPath, file)) as csvFile:
 				reader = csv.reader(csvFile, delimiter=';')
@@ -80,18 +82,21 @@ class Wordcloud_Generator:
 		wordcloud2 = WordCloud(stopwords=STOPWORDS, background_color='white', max_words=int(maxCloudWords)).generate(uniqueWordsAfter)
 		self.plotWordcloud(wordcloud, wordcloud2, chartsFolder, 'UniqueWords')
 
+		#replace common words in the report file
+		with open(self.reportFileName) as f:
+			newText = f.read().replace('<EXCLUDED_WORDS_LIST>', ",".join(self.commonWords))
+			newText = newText.replace('<BORDER_DATE>', borderDateString)
+		with open(self.reportFileName, "w") as f:
+			f.write(newText)
+
 	#compares two comma separated strings and returns just unique words from the first string
 	def getUniqueWords(self,commaSeparatedWords1, commaSeparatedWords2):
 		words1 = commaSeparatedWords1.split(",")
-		words1 = [x.upper() for x in words1]
 		words2 = commaSeparatedWords2.split(",")
-		words2 = [x.upper() for x in words2]
 		wordset1 = set(words1)
 		wordset2 = set(words2)
 		uniqueWordsList = list(wordset1 - wordset2)
 		#return uniqueWordsList
-		if 'MCGREGOR' in uniqueWordsList:
-			hes = True;
 		return ','.join(map(str, uniqueWordsList))
 
 	def isCommon(self,word):

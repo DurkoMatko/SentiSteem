@@ -8,6 +8,7 @@ import pickle
 import csv
 import collections
 import xlsxwriter
+import json
 import numpy as np
 import datetime as dt
 import matplotlib.pyplot as plt
@@ -101,6 +102,25 @@ def downloadTweets():
 			newText = newText.replace('<WITHIN>', "")
 
 	with open(reportFileName, "w") as f: f.write(newText)
+	writeHistory(reportFileName)
+
+def writeHistory(reportFileName):
+	#build the unordered list items
+	historyString = ""
+	historyJson = config.get('FolderTree', 'historyJson')
+	with open(historyJson) as historyFile:
+		historyEntries = json.load(historyFile)
+		for historyPost in historyEntries['posts']:
+			historyString += "<li>" + historyPost['keyword'] + " (from " + \
+							 historyPost['from'] + " to " + \
+							 historyPost['to'] + ") - <a href=\"" +\
+							 historyPost['link'] + "\">""HERE</a></li>"
+
+	#insert the list into the post
+	with open(reportFileName) as f:
+		newText = f.read().replace('<PREVIOUS_POSTS_LIST>', historyString)
+	with open(reportFileName, "w") as f: f.write(newText)
+
 
 ##################### PLOTTING ###################################
 def getDatesAndScores(reader,classifier):
@@ -270,8 +290,8 @@ def createCharts():
 	chartsFolder = config.get('FolderTree', 'chartsFolder')
 	reportFileName = config.get('FolderTree', 'reportsFolder') + "/" + config.get('FolderTree', 'reportFile')
 
-	#wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'))
-	#wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
+	wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'), reportFileName, config.get('FolderTree', 'tweetsFolder'))
+	wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
 
 	plotter = Charts_Plotter(chartsFolder=chartsFolder, reportFileName=reportFileName)
 	plotter.sentimentLinechart();
