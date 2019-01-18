@@ -62,6 +62,8 @@ class Wordcloud_Generator:
 								wordsAfter = wordsAfter + "," + word
 
 
+		print words
+		print wordsAfter
 		#FIX: Wordcloud interprets word HELLO-WORLD as two separate words, therefore I'm replacing "-" with empty string to make the word unique
 		words = words.replace("-", "")
 		wordsAfter = wordsAfter.replace("-", "")

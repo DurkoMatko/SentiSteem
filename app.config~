@@ -1,11 +1,15 @@
 [FolderTree]
-tweetsFolder = tweets_To_Analyze
-tweetsArchive = tweetsArchive
-chartsFolder = chartsFolder
+tweetsFolder = Tweets_to_analyze
+tweetsArchive = Tweets_archive
+chartsFolder = Charts
+reportsFolder = Reports
+templateFile = report_template.txt
+reportFile = report.txt
+historyJson = history.json
 
 [GUI]
 guiWidth = 300
 
 [Wordcloud]
-commonWords = ["yii","new","via","price","dlvr","gl","eth","bitcoin","blockchain","btc","ethereum","crypto","cryptocurrency","twitter","exchange","https","reddit","pic","cryptocurrencies","ly","ift"]
+commonWords = ["yii","bit.ly",".ly"]
 

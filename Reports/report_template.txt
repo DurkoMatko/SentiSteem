@@ -1,19 +1,19 @@
-[SentiSteem report #<REPORT_COUNT> - Twitter popularity analysis of "<KEYWORD>" between <TWEETS_SINCE> and <TWEETS_TO>
+[SentiSteem report #<REPORT_COUNT>] Twitter popularity analysis of the word "<KEYWORD>" between <TWEETS_SINCE> and <TWEETS_TO>
+<center>-------------------LINECHART---------------------------------------</center>
+<b><i>Hello world!</i>  Welcome to report where I'm using machine learning to analyze tweets about specified topic and present results in form of various and easy to understand charts. The sentiment analysis algorithm has been developed as part of my Master Thesis in 2017/2018. </b>
 
-<b><i>Hello world!</i>  Welcome to another report where I'm using machine learning to analyze tweets about specified topic and present results in form of various and easy to understand charts. The sentiment analysis algorithm has been developed as part of my Master Thesis in 2017/2018. </b>
-
-<center><h4>This report is currently being published exclusively here on Steemit.</h4></center>
+<center><h3>This report is currently being published exclusively here on Steemit.</h3></center>
 
 <center>![text10.png](https://cdn.steemitimages.com/DQmd9n1B8hpaQPjHwweHKzr5bYSkWaZshJGzsZJ28yzLaUm/text10.png)</center>
 
 <h3>Parameters</h3>Today's analysis has been executed on tweets which contain word <b>"<KEYWORD>"</b> and were published <b>between <TWEETS_SINCE> and <TWEETS_TO></b>. Detailed specification of the data is shown in the following list:
 <ul>
-<li>Keyword: <KEYWORD></li>
-<li>From: <TWEETS_SINCE></li>
-<li>To: <TWEETS_TO></li>
-<li>Number of analyzed tweets: <TWEETS_NUMBER></li>
-<li>Language: <LANGUAGE></li>
-<li>Geographical location: <NEAR> <WITHIN> </li>
+<li><b>Keyword:</b> <KEYWORD></li>
+<li><b>From:</b> <TWEETS_SINCE></li>
+<li><b>To:</b> <TWEETS_TO></li>
+<li><b>Number of analyzed tweets:</b> <TWEETS_NUMBER></li>
+<li><b>Language:</b> <LANGUAGE></li>
+<li><b>Geographical location:</b> <NEAR> <WITHIN> </li>
 </ul>
 
 <center>![text01.png](https://cdn.steemitimages.com/DQmZSJ8jY8rVQrN3jGZcPrqeJpTHGW68AkyhEipSrqspmaX/text01.png)</center>
@@ -23,42 +23,43 @@
 <center>-------------------LINECHART---------------------------------------</center>
 <center><sup>Sentiment of tweets for keyword <b>"<KEYWORD>"</b></sup></center>
 
-<b><i>My subjective comment on the chart:</i></b> It's down
+<b><i>My subjective comment on the chart:</i></b> Lorem ipsum
 
+<h3>Aggregation using heatmaps </h3></hr>
 To show the general trend/pattern in the sentiment, linechart works great. We can see the bigger timeframe and estimate the long-term direction. But if you're interested in particular month or week, it's hard and in case of weeks actually impossible to see the change. Has an athlete put the great performance in particular match? Has the brand/company released a new line of product? So see such low lever changes, following 2 heatmaps are to be used.
 
 <center>-------------------HEATMAP_MONTHLY---------------------------------------</center>
 <center><sup>Chart shows average sentiment per month where <HEATMAP_MONTHLY_LOWEST> is the worst and <HEATMAP_MONTHLY_HIGHEST> the best achieved score</sup></center>
 
-<b><i>My subjective comment on the chart:</i></b> It's down
+<b><i>My subjective comment on the chart:</i></b> Lorem ipsum
 
 <center>-------------------HEATMAP_WEEKLY---------------------------------------</center>
 <center><sup>Chart shows average sentiment per week where <HEATMAP_WEEKLY_LOWEST> is the worst and <HEATMAP_WEEKLY_HIGHEST> the best achieved score</sup></center>
 
-<b><i>My subjective comment on the chart:</i></b> It's down
+<b><i>My subjective comment on the chart:</i></b> Lorem ipsum
 
-<h3>Most frequently used words</h3>Another very interesting aspect to look into are the repeatedly used words using wordclouds. Even more interesting is to compare two wordclouds generated from different time - usually before and after some event/change happened. If you give this a second though, the problem here is that many short words (like <i>"and", "or", "with"</i> and so on) are used almost in every sentence and would also show up in wordclouds. To mitigate this, I've removed list of 153 so called <a href="https://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html">stopwords</a>. Additionally I've also removed words typical for this area listed in the end of the report*.
+<h3>Most frequently used words</h3><hr/>Another very interesting aspect to look into are the repeatedly used words using wordclouds. Even more interesting is to compare two wordclouds generated from different time - usually before and after some event/change happened. If you give this a second though, the problem here is that many short words (like <i>"and", "or", "with"</i> and so on) are used almost in every sentence and would also show up in wordclouds. To mitigate this, I've removed list of 153 so called <a href="https://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html">stopwords</a>. Additionally I've also removed words typical for this area listed in the end of the report*.
 
 <center>-------------------WORDCLOUD-ALL---------------------------------------</center>
 <center><sup>Most often used words in tweets containing word <b>"<KEYWORD>"</b> before and after <BORDER_DATE>.</sup></center>
 
-<b><i>My subjective comment on the chart:</i></b> It's down
+<b><i>My subjective comment on the chart:</i></b> Lorem ipsum
 
 <h3>Most frequently used UNIQUE words</h3>As we can see in the previous worldcloud, there are many words which are actually shared in both wordclouds. That makes all the sense as there are many areas which will be forever connected with <KEYWORD>. But I went one step further and decided to create wordclouds which contain only unique words with don't appear in the opposite wordcloud.
 
 <center>-------------------WORDCLOUD-UNIQUE---------------------------------------</center>
-<center><sup>Most often UNIQUE used words in tweets containing word <b>"<KEYWORD>"</b> before and after <BORDER-DATE>.</sup></center>
+<center><sup>Most often UNIQUE used words in tweets containing word <b>"<KEYWORD>"</b> before and after <BORDER_DATE>.</sup></center>
 
-<i>* words excluded from all 4 wordclouds were: <EXCLUDED_WORDS_LIST></i>
+<i>* words excluded from all 4 wordclouds are: <EXCLUDED_WORDS_LIST></i>
 
-<center>![text01.png](https://cdn.steemitimages.com/DQmZSJ8jY8rVQrN3jGZcPrqeJpTHGW68AkyhEipSrqspmaX/text01.png)</center>
 
-<h3>About project</h3>This series of posts shows the power of machine learning and it's application in the real life. It also makes kind of symbolical point of analyzing Twitter and publishing it here on Steemit. <i>Technology of the future is being used on the social media of the future ;)</i> My previous posts can be found here:
+<center>![text10.png](https://cdn.steemitimages.com/DQmd9n1B8hpaQPjHwweHKzr5bYSkWaZshJGzsZJ28yzLaUm/text10.png)</center>
 
-<ul>
-<PREVIOUS_POSTS_LIST>
-</ul>
+<h3>About project</h3>This series of posts shows the power of machine learning and it's application in the real life. It also makes kind of symbolical point of analyzing Twitter and publishing it here on Steemit. <i>Technology of the future is being used on the social media of the future ;)</i> 
 
+<center><h1>Get your report</h1> <hr/></center>Twitter sentiment analysis reports are being sold for quite some dollars in the world outside of Steemit. I'm more than ready to send you a report on your specified keyword and dates for kind of <b>laughable price - 10 STEEM.</b> 
+
+<i>Interested in how's you favorite coin doing on Twitter? Er favorite  athlete? Politician, actor or clothes company? </i>. <b>Just DM me and you'll get the full report under 48 hours :)</b>
 <center><h3>Thanks for reading! Matko.</h3></center>
 </hr>
 </h3>

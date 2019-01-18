@@ -66,11 +66,11 @@ def downloadTweets():
 
 		# execute Exporter command
 		#os.popen(finalCommand).readlines()
-		#os.system(finalCommand)
+		os.system(finalCommand)
 
 	#copy file to configured tweets folder
 	tweetsFolder = config.get('FolderTree', 'tweetsFolder')
-	#shutil.move(outputName, tweetsFolder+"/"+outputName)
+	shutil.move(outputName, tweetsFolder+"/"+outputName)
 
 	#if we got here, we can create copy of report_template.txt file and replace placeholders
 	reportsFolder = config.get('FolderTree', 'reportsFolder')
@@ -107,9 +107,11 @@ def downloadTweets():
 def writeHistory(reportFileName):
 	#build the unordered list items
 	historyString = ""
+	reportCount = 0
 	historyJson = config.get('FolderTree', 'historyJson')
 	with open(historyJson) as historyFile:
 		historyEntries = json.load(historyFile)
+		reportCount = len(historyEntries['posts'])
 		for historyPost in historyEntries['posts']:
 			historyString += "<li>" + historyPost['keyword'] + " (from " + \
 							 historyPost['from'] + " to " + \
@@ -119,6 +121,7 @@ def writeHistory(reportFileName):
 	#insert the list into the post
 	with open(reportFileName) as f:
 		newText = f.read().replace('<PREVIOUS_POSTS_LIST>', historyString)
+		newText = newText.replace('<REPORT_COUNT>', str(reportCount))
 	with open(reportFileName, "w") as f: f.write(newText)
 
 
@@ -217,6 +220,8 @@ def executeAnalysis():
 
 			csvFile.close()
 
+	print "Analysis done."
+
 def saveDataToExcel(dates, scores, flooredDates, flooredScores, chartsFolder):
 	# Create a workbook and add a worksheet.
 	workbook = xlsxwriter.Workbook(chartsFolder + '/scores.xlsx')
@@ -293,13 +298,13 @@ def createCharts():
 	wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'), reportFileName, config.get('FolderTree', 'tweetsFolder'))
 	wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
 
-	plotter = Charts_Plotter(chartsFolder=chartsFolder, reportFileName=reportFileName)
-	plotter.sentimentLinechart();
+	##plotter = Charts_Plotter(chartsFolder=chartsFolder, reportFileName=reportFileName)
+	##plotter.sentimentLinechart();
 	#plotter.LinePlot();
 	#plotter.YearlyLinePlot();
 	#plotter.Histogram();
-	plotter.HeatMap();
-	plotter.HeatMapWeekly();
+	#plotter.HeatMap();
+	#plotter.HeatMapWeekly();
 	#plotter.Autocorrelation();
 
 
