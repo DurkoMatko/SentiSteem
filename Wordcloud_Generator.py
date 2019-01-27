@@ -36,7 +36,7 @@ class Wordcloud_Generator:
 		self.reportFileName = reportFileName
 		self.tweetsFolder = tweetsFolder
 
-	def createWordcloud(self, chartsFolder, maxCloudWords, borderDateString):
+	def createWordcloud(self, chartsFolder, maskFolder, maxCloudWords, borderDateString):
 		# strings to store all the words from tweets
 		words = ""
 		wordsAfter = ""
@@ -91,7 +91,7 @@ class Wordcloud_Generator:
 		with open(self.reportFileName, "w") as f:
 			f.write(newText)
 
-		self.createShapedWordcloud(words+wordsAfter);
+		self.createShapedWordcloud(words+wordsAfter, chartsFolder, maskFolder);
 
 	def transform_mask_format(self,val):
 		if val == 0:
@@ -99,8 +99,8 @@ class Wordcloud_Generator:
 		else:
 			return val
 	
-	def createShapedWordcloud(self, allWords):
-		wine_mask = np.array(Image.open("Wordcloud_mask/wine_mask.png"))
+	def createShapedWordcloud(self, allWords, chartsFolder, maskFolder):
+		wine_mask = np.array(Image.open(maskFolder+"/mask.png"))
 		
 		transformed_wine_mask = np.ndarray((wine_mask.shape[0],wine_mask.shape[1]), np.int32)
 		for i in range(len(wine_mask)):
@@ -109,7 +109,7 @@ class Wordcloud_Generator:
 		wc = WordCloud(background_color="white", max_words=1000, mask=transformed_wine_mask, stopwords=STOPWORDS, contour_width=3, contour_color='firebrick')
 			   
 		wc.generate(allWords)
-		wc.to_file("Wordcloud_mask/wine.png")
+		wc.to_file(chartsFolder+"/shapedWords.png")
 
 
 	#compares two comma separated strings and returns just unique words from the first string
