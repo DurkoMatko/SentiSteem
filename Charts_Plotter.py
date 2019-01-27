@@ -267,6 +267,8 @@ class Charts_Plotter:
 
 		# plot original and regression data
 		pyplot.plot(original_dates, y, 'o')
+		d = dt.timedelta(days=14)
+		pyplot.xlim(xmax=max(original_dates)+d, xmin=min(original_dates)-d)
 		pyplot.ylim(ymax=max(y)+0.025, ymin=min(y)-0.025)
 		pyplot.grid()
 

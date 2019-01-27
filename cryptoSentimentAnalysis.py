@@ -403,14 +403,6 @@ def plotPolynomials(minDate,passedDays,scores,projectName,mypath):
 
     plt.show()
 
-    # printing data for supervisor meeting and sheet creation
-    xy_dict = dict(zip(original_dates, y))
-    xy_dict_sorted = collections.OrderedDict(sorted(xy_dict.items()))
-    for key in xy_dict_sorted.keys():
-        print str(key)
-    for val in xy_dict_sorted.values():
-        print val
-
 
 def getCryptoPrices(projectName,cryptoPricesPath):
     with open(os.path.join(cryptoPricesPath, projectName)) as priceFile:
