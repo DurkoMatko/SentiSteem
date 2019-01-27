@@ -298,13 +298,13 @@ def createCharts():
 	wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'), reportFileName, config.get('FolderTree', 'tweetsFolder'))
 	wordcloudGenerator.createWordcloud(chartsFolder, maxCloudWords.get(), borderDate.get())
 
-	##plotter = Charts_Plotter(chartsFolder=chartsFolder, reportFileName=reportFileName)
-	##plotter.sentimentLinechart();
+	plotter = Charts_Plotter(chartsFolder=chartsFolder, reportFileName=reportFileName)
+	plotter.sentimentLinechart();
 	#plotter.LinePlot();
 	#plotter.YearlyLinePlot();
 	#plotter.Histogram();
-	#plotter.HeatMap();
-	#plotter.HeatMapWeekly();
+	plotter.HeatMap();
+	plotter.HeatMapWeekly();
 	#plotter.Autocorrelation();
 
 
