@@ -7,6 +7,8 @@ import unicodedata  #smileys
 import datetime
 import json
 import pickle
+import numpy as np
+from PIL import Image
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
 from collections import defaultdict
@@ -62,8 +64,6 @@ class Wordcloud_Generator:
 								wordsAfter = wordsAfter + "," + word
 
 
-		print words
-		print wordsAfter
 		#FIX: Wordcloud interprets word HELLO-WORLD as two separate words, therefore I'm replacing "-" with empty string to make the word unique
 		words = words.replace("-", "")
 		wordsAfter = wordsAfter.replace("-", "")
@@ -90,6 +90,27 @@ class Wordcloud_Generator:
 			newText = newText.replace('<BORDER_DATE>', borderDateString)
 		with open(self.reportFileName, "w") as f:
 			f.write(newText)
+
+		self.createShapedWordcloud(words+wordsAfter);
+
+	def transform_mask_format(self,val):
+		if val == 0:
+			return 255
+		else:
+			return val
+	
+	def createShapedWordcloud(self, allWords):
+		wine_mask = np.array(Image.open("Wordcloud_mask/wine_mask.png"))
+		
+		transformed_wine_mask = np.ndarray((wine_mask.shape[0],wine_mask.shape[1]), np.int32)
+		for i in range(len(wine_mask)):
+			transformed_wine_mask[i] = list(map(self.transform_mask_format, wine_mask[i]))
+
+		wc = WordCloud(background_color="white", max_words=1000, mask=transformed_wine_mask, stopwords=STOPWORDS, contour_width=3, contour_color='firebrick')
+			   
+		wc.generate(allWords)
+		wc.to_file("Wordcloud_mask/wine.png")
+
 
 	#compares two comma separated strings and returns just unique words from the first string
 	def getUniqueWords(self,commaSeparatedWords1, commaSeparatedWords2):
@@ -123,4 +144,5 @@ class Wordcloud_Generator:
 
 		plt.savefig(chartsFolder + "/" + picName + ".png")
 		plt.close()
+
 
