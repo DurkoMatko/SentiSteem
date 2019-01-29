@@ -33,8 +33,8 @@ def perdelta(start, end, delta):
 def downloadTweets():
 	#build Exporter command
 	cmdCommand = "python2.7 GetOldTweets-python-master/Exporter.py"
-	cmdCommand = cmdCommand + " --since %%SINCE%%"# + since.get()
-	cmdCommand = cmdCommand + " --until %%UNTIL%%"# + until.get()
+	cmdCommand = cmdCommand + " --since %%SINCE%%"
+	cmdCommand = cmdCommand + " --until %%UNTIL%%"
 
 	if (len(near.get()) != 0):
 		cmdCommand = cmdCommand + " --near " + near.get()
@@ -44,7 +44,7 @@ def downloadTweets():
 		cmdCommand = cmdCommand + " --lang '" + language.get() + "'"
 
 
-	cmdCommand = cmdCommand + " --maxtweets %%MAXTWEETS%%"# + maxtweets.get()
+	cmdCommand = cmdCommand + " --maxtweets %%MAXTWEETS%%"
 	queryKeyword = querysearch.get()
 	cmdCommand = cmdCommand + " --querysearch '" + queryKeyword + "'"
 	outputName = queryKeyword + "_" + maxtweets.get() + ".csv"
@@ -85,6 +85,7 @@ def downloadTweets():
 		newText = newText.replace('<TWEETS_SINCE>', since.get())
 		newText = newText.replace('<TWEETS_TO>', until.get())
 		newText = newText.replace('<TWEETS_NUMBER>', maxtweets.get())
+		newText = newText.replace('<TWEETS_PER_WEEK>', str(tweetsPerIteration))
 
 		if (len(language.get()) != 0):
 			newText = newText.replace('<LANGUAGE>', language.get())

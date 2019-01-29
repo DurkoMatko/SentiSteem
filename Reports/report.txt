@@ -4,63 +4,72 @@
 
 <center><h3>This report is currently being published exclusively here on Steemit.</h3></center>
 
-<center>![text10.png](https://cdn.steemitimages.com/DQmd9n1B8hpaQPjHwweHKzr5bYSkWaZshJGzsZJ28yzLaUm/text10.png)</center>
+<center>![Power House Creatives Logos FINAL.png](https://steemitimages.com/1500x871/https://cdn.steemitimages.com/DQmUzYupyiqXfdHSGw7s6BBoVB15GL9ZvhUPnWoaEveXTiQ/Power%20House%20Creatives%20Logos%20FINAL.png)</center>
 
 <h3>Parameters</h3>Today's analysis has been executed on tweets which contain word <b>"trump"</b> and were published <b>between 2013-01-01 and 2017-12-31</b>. Detailed specification of the data is shown in the following list:
 <ul>
 <li><b>Keyword:</b> trump</li>
 <li><b>From:</b> 2013-01-01</li>
 <li><b>To:</b> 2017-12-31</li>
-<li><b>Number of analyzed tweets:</b> 15000</li>
+<li><b>Number of analyzed tweets:</b> 25000</li>
+<li><b>Tweets per week:</b> 95</li>
 <li><b>Language:</b> en</li>
 <li><b>Geographical location:</b> Not specified  </li>
 </ul>
 
-<center>![text01.png](https://cdn.steemitimages.com/DQmZSJ8jY8rVQrN3jGZcPrqeJpTHGW68AkyhEipSrqspmaX/text01.png)</center>
+<center>![text16.png](https://cdn.steemitimages.com/DQmcvVqhGMbF1KAHTn9Wh8FiRhmpAbiEuAKerVM7ugDnXfX/text16.png)</center>
 
-<h1>Results</h1><h3>Sentiment </h3></hr>After downloading 15000 tweets between the specified dates, sentiment analysis has been executed on each and every one of those tweets. Sentiment score has been then <b>aggregated over weeks and months</b>, to lower the granularity of results on the time axis and then <b>plotted as a following linechart. </b>
+<h1>Results</h1><h3>Sentiment </h3></hr>After downloading 25000 tweets between the specified dates, sentiment analysis has been executed on each and every one of those tweets. Sentiment score has been then <b>aggregated over weeks and months</b>, to lower the granularity of results on the time axis and then <b>plotted as a following linechart. </b>
 
 <center>-------------------LINECHART---------------------------------------</center>
 <center><sup>Sentiment of tweets for keyword <b>"trump"</b></sup></center>
 
-<b><i>My subjective comment on the chart:</i></b> Lorem ipsum
+<b><i>My subjective comment on the chart:</i></b> I'm not sure how to interpret this chart so if you guys see some explanation/pattern in there, please let me know in the comments. I'd reply to every comment (as I always do anyway)
 
 <h3>Aggregation using heatmaps </h3></hr>
 To show the general trend/pattern in the sentiment, linechart works great. We can see the bigger timeframe and estimate the long-term direction. But if you're interested in particular month or week, it's hard and in case of weeks actually impossible to see the change. Has an athlete put the great performance in particular match? Has the brand/company released a new line of product? So see such low lever changes, following 2 heatmaps are to be used.
 
 <center>-------------------HEATMAP_MONTHLY---------------------------------------</center>
-<center><sup>Chart shows average sentiment per month where 0.55 is the worst and 0.71 the best achieved score</sup></center>
+<center><sup>Chart shows average sentiment per month where 0.54 is the worst and 0.72 the best achieved score</sup></center>
 
-<b><i>My subjective comment on the chart:</i></b> Lorem ipsum
+<b><i>My subjective comment on the chart:</i></b>I'm not sure how to interpret this chart so if you guys see some explanation/pattern in there, please let me know in the comments. I'd reply to every comment (as I always do anyway)
 
 <center>-------------------HEATMAP_WEEKLY---------------------------------------</center>
-<center><sup>Chart shows average sentiment per week where 0.54 is the worst and 0.74 the best achieved score</sup></center>
+<center><sup>Chart shows average sentiment per week where 0.00 is the worst and 0.75 the best achieved score</sup></center>
 
-<b><i>My subjective comment on the chart:</i></b> Lorem ipsum
+<b><i>My subjective comment on the chart:</i></b>I'm not sure how to interpret this chart so if you guys see some explanation/pattern in there, please let me know in the comments. I'd reply to every comment (as I always do anyway)
 
 <h3>Most frequently used words</h3><hr/>Another very interesting aspect to look into are the repeatedly used words using wordclouds. Even more interesting is to compare two wordclouds generated from different time - usually before and after some event/change happened. If you give this a second though, the problem here is that many short words (like <i>"and", "or", "with"</i> and so on) are used almost in every sentence and would also show up in wordclouds. To mitigate this, I've removed list of 153 so called <a href="https://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html">stopwords</a>. Additionally I've also removed words typical for this area listed in the end of the report*.
 
 <center>-------------------WORDCLOUD-ALL---------------------------------------</center>
 <center><sup>Most often used words in tweets containing word <b>"trump"</b> before and after 2015-10-10.</sup></center>
 
-<b><i>My subjective comment on the chart:</i></b> Lorem ipsum
+<b><i>My subjective comment on the chart:</i></b>I'm not sure how to interpret this chart so if you guys see some explanation/pattern in there, please let me know in the comments. I'd reply to every comment (as I always do anyway)
 
 <h3>Most frequently used UNIQUE words</h3>As we can see in the previous worldcloud, there are many words which are actually shared in both wordclouds. That makes all the sense as there are many areas which will be forever connected with trump. But I went one step further and decided to create wordclouds which contain only unique words with don't appear in the opposite wordcloud.
 
 <center>-------------------WORDCLOUD-UNIQUE---------------------------------------</center>
 <center><sup>Most often UNIQUE used words in tweets containing word <b>"trump"</b> before and after 2015-10-10.</sup></center>
 
-<i>* words excluded from all 4 wordclouds are: yii,bit.ly,.ly,food,eat,recipe,make,vegan</i>
+<i>* words excluded from all 4 wordclouds are: yii,bit.ly,.ly,donald,trump,donaldtrump</i>
+
+<h3>BONUS - shaped wordcloud from all words!</h3>This one is just for fun :) It's generated from 1000 most popular words in all tweets, not divided into <i>before</i> and <i>after</i> groups.
+
+<center>-------------------SHAPED-WORDCLOUD---------------------------------------</center>
 
 
-<center>![text10.png](https://cdn.steemitimages.com/DQmd9n1B8hpaQPjHwweHKzr5bYSkWaZshJGzsZJ28yzLaUm/text10.png)</center>
+<center>![Power House Creatives Logos FINAL.png](https://steemitimages.com/1500x871/https://cdn.steemitimages.com/DQmUzYupyiqXfdHSGw7s6BBoVB15GL9ZvhUPnWoaEveXTiQ/Power%20House%20Creatives%20Logos%20FINAL.png)</center>
 
-<h3>About project</h3>This series of posts shows the power of machine learning and it's application in the real life. It also makes kind of symbolical point of analyzing Twitter and publishing it here on Steemit. <i>Technology of the future is being used on the social media of the future ;)</i> 
+<center><h3>About project</h3></center>This series of posts shows the power of machine learning and it's application in the real life. It also makes kind of symbolical point of analyzing Twitter and publishing it here on Steemit. <i>Technology of the future is being used on the social media of the future ;)</i> 
 
-<center><h1>Get your report</h1> <hr/></center>Twitter sentiment analysis reports are being sold for quite some dollars in the world outside of Steemit. I'm more than ready to send you a report on your specified keyword and dates for kind of <b>laughable price - 10 STEEM.</b> 
+<center><h1>Get your report</h1> <hr/></center>Twitter sentiment analysis reports are being sold for quite some dollars in the world outside of Steemit. In our tiny word of Steemit, such price would be way too much - that's why I'm offering to generate& send you a report with your chosen keyword and dates for a <b>laughable price - 10 STEEM. Order 3 and get the fourth one for free :)</b> 
 
-<i>Interested in how's you favorite coin doing on Twitter? Er favorite  athlete? Politician, actor or clothes company? </i>. <b>Just DM me and you'll get the full report under 48 hours :)</b>
-<center><h3>Thanks for reading! Matko.</h3></center>
+<i>Interested in how's you favorite coin doing on Twitter? Or favorite  athlete? Politician, actor or clothes company? </i>. <b>Just DM me and you'll get the full report under 48 hours :)</b>
+
+<center>![Power House Creatives Logos FINAL.png](https://steemitimages.com/1500x871/https://cdn.steemitimages.com/DQmUzYupyiqXfdHSGw7s6BBoVB15GL9ZvhUPnWoaEveXTiQ/Power%20House%20Creatives%20Logos%20FINAL.png)</center>
+
+
+<center><h3>Hope you enjoyed! Matko.</h3></center>
 </hr>
 </h3>
 

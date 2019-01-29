@@ -4,7 +4,7 @@
 
 <center><h3>This report is currently being published exclusively here on Steemit.</h3></center>
 
-<center>![text10.png](https://cdn.steemitimages.com/DQmd9n1B8hpaQPjHwweHKzr5bYSkWaZshJGzsZJ28yzLaUm/text10.png)</center>
+<center>![Power House Creatives Logos FINAL.png](https://steemitimages.com/1500x871/https://cdn.steemitimages.com/DQmUzYupyiqXfdHSGw7s6BBoVB15GL9ZvhUPnWoaEveXTiQ/Power%20House%20Creatives%20Logos%20FINAL.png)</center>
 
 <h3>Parameters</h3>Today's analysis has been executed on tweets which contain word <b>"<KEYWORD>"</b> and were published <b>between <TWEETS_SINCE> and <TWEETS_TO></b>. Detailed specification of the data is shown in the following list:
 <ul>
@@ -12,11 +12,12 @@
 <li><b>From:</b> <TWEETS_SINCE></li>
 <li><b>To:</b> <TWEETS_TO></li>
 <li><b>Number of analyzed tweets:</b> <TWEETS_NUMBER></li>
+<li><b>Tweets per week:</b> <TWEETS_PER_WEEK></li>
 <li><b>Language:</b> <LANGUAGE></li>
 <li><b>Geographical location:</b> <NEAR> <WITHIN> </li>
 </ul>
 
-<center>![text01.png](https://cdn.steemitimages.com/DQmZSJ8jY8rVQrN3jGZcPrqeJpTHGW68AkyhEipSrqspmaX/text01.png)</center>
+<center>![text16.png](https://cdn.steemitimages.com/DQmcvVqhGMbF1KAHTn9Wh8FiRhmpAbiEuAKerVM7ugDnXfX/text16.png)</center>
 
 <h1>Results</h1><h3>Sentiment </h3></hr>After downloading <TWEETS_NUMBER> tweets between the specified dates, sentiment analysis has been executed on each and every one of those tweets. Sentiment score has been then <b>aggregated over weeks and months</b>, to lower the granularity of results on the time axis and then <b>plotted as a following linechart. </b>
 
@@ -52,15 +53,23 @@ To show the general trend/pattern in the sentiment, linechart works great. We ca
 
 <i>* words excluded from all 4 wordclouds are: <EXCLUDED_WORDS_LIST></i>
 
+<h3>BONUS - shaped wordcloud from all words!</h3>This one is just for fun :) It's generated from 1000 most popular words in all tweets, not divided into <i>before</i> and <i>after</i> groups. Click it to open!
 
-<center>![text10.png](https://cdn.steemitimages.com/DQmd9n1B8hpaQPjHwweHKzr5bYSkWaZshJGzsZJ28yzLaUm/text10.png)</center>
+<center>-------------------SHAPED-WORDCLOUD---------------------------------------</center>
 
-<h3>About project</h3>This series of posts shows the power of machine learning and it's application in the real life. It also makes kind of symbolical point of analyzing Twitter and publishing it here on Steemit. <i>Technology of the future is being used on the social media of the future ;)</i> 
 
-<center><h1>Get your report</h1> <hr/></center>Twitter sentiment analysis reports are being sold for quite some dollars in the world outside of Steemit. I'm more than ready to send you a report on your specified keyword and dates for kind of <b>laughable price - 10 STEEM.</b> 
+<center>![Power House Creatives Logos FINAL.png](https://steemitimages.com/1500x871/https://cdn.steemitimages.com/DQmUzYupyiqXfdHSGw7s6BBoVB15GL9ZvhUPnWoaEveXTiQ/Power%20House%20Creatives%20Logos%20FINAL.png)</center>
 
-<i>Interested in how's you favorite coin doing on Twitter? Er favorite  athlete? Politician, actor or clothes company? </i>. <b>Just DM me and you'll get the full report under 48 hours :)</b>
-<center><h3>Thanks for reading! Matko.</h3></center>
+<center><h3>About project</h3></center>This series of posts shows the power of machine learning and it's application in the real life. It also makes kind of symbolical point of analyzing Twitter and publishing it here on Steemit. <i>Technology of the future is being used on the social media of the future ;)</i> 
+
+<center><h1>Get your report</h1> <hr/></center>Twitter sentiment analysis reports are being sold for quite some dollars in the world outside of Steemit. In our tiny word of Steemit, such price would be way too much - that's why I'm offering to generate& send you a report with your chosen keyword and dates for a <b>laughable price - 10 STEEM. Order 3 and get the fourth one for free :)</b> 
+
+<i>Interested in how's you favorite coin doing on Twitter? Or favorite  athlete? Politician, actor or clothes company? </i>. <b>Just DM me and you'll get the full report under 48 hours :)</b>
+
+<center>![Power House Creatives Logos FINAL.png](https://steemitimages.com/1500x871/https://cdn.steemitimages.com/DQmUzYupyiqXfdHSGw7s6BBoVB15GL9ZvhUPnWoaEveXTiQ/Power%20House%20Creatives%20Logos%20FINAL.png)</center>
+
+
+<center><h3>Hope you enjoyed! Matko.</h3></center>
 </hr>
 </h3>
 

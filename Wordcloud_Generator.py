@@ -109,7 +109,7 @@ class Wordcloud_Generator:
 		for i in range(len(wine_mask)):
 			transformed_wine_mask[i] = list(map(self.transform_mask_format, wine_mask[i]))
 
-		wc = WordCloud(background_color="white", max_words=1000, mask=transformed_wine_mask, stopwords=STOPWORDS, contour_width=3)
+		wc = WordCloud(background_color="black", max_words=1000, mask=transformed_wine_mask, stopwords=STOPWORDS, contour_width=3, contour_color='white')
 			   
 		wc.generate(allWords)
 		wc.to_file(chartsFolder+"/shapedWords.png")
