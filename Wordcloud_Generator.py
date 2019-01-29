@@ -138,12 +138,12 @@ class Wordcloud_Generator:
 		plt.subplot(211)
 		plt.title('Before')
 		plt.axis('off')
-		plt.imshow(before)
+		plt.imshow(before, interpolation="bilinear")   #interpolation needed because Matplotlib v2 doesn't do image interpolation for imshow any more (https://github.com/amueller/word_cloud/issues/188)
 
 		plt.subplot(212)
 		plt.title('After')
 		plt.axis('off')
-		plt.imshow(after)
+		plt.imshow(after, interpolation="bilinear")    #interpolation needed because Matplotlib v2 doesn't do image interpolation for imshow any more(https://github.com/amueller/word_cloud/issues/188)
 
 		plt.savefig(chartsFolder + "/" + picName + ".png")
 		plt.close()
