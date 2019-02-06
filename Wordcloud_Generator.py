@@ -78,7 +78,6 @@ class Wordcloud_Generator:
 
 		#now plot the same but without shared words
 		uniqueWords = self.getUniqueWords(words, wordsAfter)
-		print uniqueWords
 		uniqueWordsAfter = self.getUniqueWords(wordsAfter, words)
 		wordcloud = WordCloud(stopwords=STOPWORDS, max_words=int(maxCloudWords)).generate(uniqueWords)
 		wordcloud2 = WordCloud(stopwords=STOPWORDS, background_color='white', max_words=int(maxCloudWords)).generate(uniqueWordsAfter)
@@ -109,7 +108,7 @@ class Wordcloud_Generator:
 		for i in range(len(wine_mask)):
 			transformed_wine_mask[i] = list(map(self.transform_mask_format, wine_mask[i]))
 
-		wc = WordCloud(background_color="black", max_words=1000, mask=transformed_wine_mask, stopwords=STOPWORDS, contour_width=3, contour_color='white')
+		wc = WordCloud(colormap="Reds", max_words=500, mask=transformed_wine_mask, stopwords=STOPWORDS, contour_width=1, contour_color='white')
 			   
 		wc.generate(allWords)
 		wc.to_file(chartsFolder+"/shapedWords.png")

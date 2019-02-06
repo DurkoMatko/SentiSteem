@@ -298,8 +298,8 @@ def createCharts():
 	maskFolder = config.get('FolderTree', 'maskFolder')
 	reportFileName = config.get('FolderTree', 'reportsFolder') + "/" + config.get('FolderTree', 'reportFile')
 
-	#wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'), reportFileName, config.get('FolderTree', 'tweetsFolder'))
-	#wordcloudGenerator.createWordcloud(chartsFolder, maskFolder, maxCloudWords.get(), borderDate.get())
+	wordcloudGenerator = Wordcloud_Generator(config.get('Wordcloud', 'commonWords'), reportFileName, config.get('FolderTree', 'tweetsFolder'))
+	wordcloudGenerator.createWordcloud(chartsFolder, maskFolder, maxCloudWords.get(), borderDate.get())
 
 	plotter = Charts_Plotter(chartsFolder=chartsFolder, reportFileName=reportFileName)
 	plotter.sentimentLinechart();
