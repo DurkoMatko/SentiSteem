@@ -51,6 +51,8 @@ To show the general trend/pattern in the sentiment, linechart works great. We ca
 <center>-------------------WORDCLOUD-UNIQUE---------------------------------------</center>
 <center><sup>Most often UNIQUE used words in tweets containing word <b>"<KEYWORD>"</b> before and after <BORDER_DATE>.</sup></center>
 
+<b><i>My subjective comment on the chart:</i></b>I'm not sure how to interpret this chart so if you guys see some explanation/pattern in there, please let me know in the comments. I'd reply to every comment (as I always do anyway)
+
 <i>* words excluded from all 4 wordclouds are: <EXCLUDED_WORDS_LIST></i>
 
 <h3>BONUS - shaped wordcloud from all words!</h3>This one is just for fun :) It's generated from 1000 most popular words in all tweets, not divided into <i>before</i> and <i>after</i> groups. Click it to open!
@@ -62,7 +64,7 @@ To show the general trend/pattern in the sentiment, linechart works great. We ca
 
 <center><h3>About project</h3></center>This series of posts shows the power of machine learning and it's application in the real life. It also makes kind of symbolical point of analyzing Twitter and publishing it here on Steemit. <i>Technology of the future is being used on the social media of the future ;)</i> 
 
-<center><h1>Get your report</h1> <hr/></center>Twitter sentiment analysis reports are being sold for quite some dollars in the world outside of Steemit. In our tiny word of Steemit, such price would be way too much - that's why I'm offering to generate& send you a report with your chosen keyword and dates for a <b>laughable price - 10 STEEM. Order 3 and get the fourth one for free :)</b> 
+<center><h1>Get your report</h1> <hr/></center>Twitter sentiment analysis reports are being sold for quite some dollars in the world outside of Steemit. In our tiny word of Steemit, such price would be way too much - that's why I'm offering to generate& send you a report with your chosen keyword and dates for a <b><i>laughable price - 5 STEEM.</i></b>  Order 3 and get the fourth one for free :)
 
 <i>Interested in how's you favorite coin doing on Twitter? Or favorite  athlete? Politician, actor or clothes company? </i>. <b>Just DM me and you'll get the full report under 48 hours :)</b>
 
