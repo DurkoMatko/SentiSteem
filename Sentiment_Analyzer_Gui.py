@@ -376,7 +376,7 @@ if __name__ == '__main__':
 
 	Label(analyzerGui, text='Border date', justify=LEFT).pack()
 	borderDateEntry = Entry(analyzerGui, textvariable=borderDate)
-	borderDateEntry.insert(END, '2015-10-10')
+	borderDateEntry.insert(END, '2015-12-31')
 	borderDateEntry.pack()
 
 	Button(analyzerGui, text="Create charts from CSV data", command=createCharts, fg="red").pack()

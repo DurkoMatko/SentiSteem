@@ -1,4 +1,4 @@
-[SentiSteem report #<REPORT_COUNT>] Twitter popularity analysis of the word "<KEYWORD>" between <TWEETS_SINCE> and <TWEETS_TO>
+[SentiSteem report #<REPORT_COUNT>] Twitter analysis of word "<KEYWORD>" between <TWEETS_SINCE> and <TWEETS_TO>
 <center>-------------------LINECHART---------------------------------------</center>
 <b><i>Hello world!</i>  Welcome to report where I'm using machine learning to analyze tweets about specified topic and present results in form of various and easy to understand charts. The sentiment analysis algorithm has been developed as part of my Master Thesis in 2017/2018. </b>
 
