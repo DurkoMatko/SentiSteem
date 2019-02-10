@@ -55,7 +55,7 @@ To show the general trend/pattern in the sentiment, linechart works great. We ca
 
 <i>* words excluded from all 4 wordclouds are: <EXCLUDED_WORDS_LIST></i>
 
-<h3>BONUS - shaped wordcloud from all words!</h3>This one is just for fun :) It's generated from 1000 most popular words in all tweets, not divided into <i>before</i> and <i>after</i> groups. Click it to open!
+<h3>BONUS - shaped wordcloud from all words!</h3>This one is just for fun :) It's generated from 1000 most popular words in all tweets, not divided into <i>before</i> and <i>after</i> groups.
 
 <center>-------------------SHAPED-WORDCLOUD---------------------------------------</center>
 

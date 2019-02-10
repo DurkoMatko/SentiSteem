@@ -344,7 +344,7 @@ if __name__ == '__main__':
 	sinceEntry.pack()
 	Label(analyzerGui, text='Until', justify=LEFT).pack()
 	untilEntry = Entry(analyzerGui, textvariable=until)
-	untilEntry.insert(END, '2017-12-31')
+	untilEntry.insert(END, '2018-12-31')
 	untilEntry.pack()
 	Label(analyzerGui, text='Near', justify=LEFT).pack()
 	Entry(analyzerGui, textvariable=near).pack()
