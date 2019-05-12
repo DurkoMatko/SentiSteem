@@ -10,6 +10,8 @@ Main functionality is:
 <li>Generate Steemit blog post using template defined in reports folder.</li>
 </ol>
 
+<center><img src="https://i.imgur.com/PXykeZN.png"></center>
+
 ### Requirements
 Following modules need to be installed:
 <code>
