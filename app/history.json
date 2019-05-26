@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "keyword": "Mcregor",
+      "from": "2013-01-01",
+      "to": "2017-12-12",
+      "link": "dede"
+    },
+    {
+      "keyword": "Trump",
+      "from": "2013-01-01",
+      "to": "2017-12-12",
+      "link": "dede"
+    }
+  ]
+}
