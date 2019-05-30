@@ -6,7 +6,7 @@ MAINTAINER DurkoMatko "nitramdurcek@gmail.com"
 RUN apt-get update -y && \  
     apt-get install -y python-pip
 
-COPY ./requirements.txt /requirements.txt
+COPY requirements.txt /requirements.txt
 
 WORKDIR /
 RUN apt-get -y install libc-dev
